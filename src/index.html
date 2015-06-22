@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="takeTurnsApp">
+  <head>
+    <title>Take turns</title>
+  </head>
+
+  <body ng-controller="takeTurnsController">
+    <h1>Take turns</h1>
+    <p ng-repeat="kid in kids" ng-click="takeTurn($index)" ng-cloak>{{ kid }}</p>
+    <p ng-show="kids.length === 0">No kids</p>
+  </body>
+
+  <script src="angular/angular.js"></script>
+  <script src="js/main.js"></script>
+</html>

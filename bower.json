@@ -1,0 +1,23 @@
+{
+  "name": "take-turns",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rascalking/take-turns-web",
+  "authors": [
+    "David Bonner <dbonner@gmail.com>"
+  ],
+  "description": "App to track whose turn it is to do something",
+  "directory": "app/components",
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.1"
+  },
+  "devDependencies": {}
+}
