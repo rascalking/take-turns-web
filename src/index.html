@@ -3,14 +3,20 @@
 <html lang="en" ng-app="takeTurnsApp">
   <head>
     <title>Take turns</title>
+    <base href="/" />
   </head>
 
-  <body ng-controller="takeTurnsController">
-    <h1>Take turns</h1>
-    <p ng-repeat="kid in kids" ng-click="takeTurn($index)" ng-cloak>{{ kid }}</p>
-    <p ng-show="kids.length === 0">No kids</p>
-  </body>
+  <body>
+    <h1>Take Turns</h1>
 
-  <script src="angular/angular.js"></script>
-  <script src="js/main.js"></script>
+    <div ng-view></div>
+
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/controllers/ArgumentListController.js"></script>
+    <script src="js/controllers/AddArgumentController.js"></script>
+    <script src="js/controllers/ArgumentDetailController.js"></script>
+    <script src="js/controllers/ArgumentAddKidController.js"></script>
+  </body>
 </html>
