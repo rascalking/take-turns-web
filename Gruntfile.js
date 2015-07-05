@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+    var modRewrite = require('connect-modrewrite');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
@@ -12,7 +14,14 @@ module.exports = function(grunt) {
             },
             livereload: {
                 options: {
-                    base: ['src', 'bower_components']
+                    base: ['src', 'bower_components'],
+                    middleware: function(connect, options, middlewares) {
+                        var modRewrite = require('connect-modrewrite');
+                        // enable Angular's HTML5 mode
+                        middlewares.unshift(modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']));
+
+                        return middlewares;
+                    }
                 }
             }
         },
