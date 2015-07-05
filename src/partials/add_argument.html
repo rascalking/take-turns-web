@@ -1,0 +1,17 @@
+<div>
+  <form novalidate ng-controller="AddArgumentController as ctrl">
+    <label>What is the argument about?</label>
+    <br />
+    <input type="text" ng-model="ctrl.argument"></input>
+    <br />
+
+    <label>Who is arguing about it?</label>
+    <div ng-repeat="kid in ctrl.kids">{{ kid }}</div>
+    <br />
+    <input type="text" ng-model="ctrl.newKid" />
+    <input type="submit" ng-click="ctrl.addKid()" value="Add" />
+    <br />
+    <input type="button" ng-click="ctrl.reset()" value="Reset" />
+    <input type="submit" ng-click="ctrl.saveArgument()" value="Save" />
+  </form>
+</div>

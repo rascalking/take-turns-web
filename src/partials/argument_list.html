@@ -1,0 +1,10 @@
+<div>
+  <h2>Arguments</h2>
+  <div><a href="#" ng-click="showAddArgumentModal()">Add Argument</a></div>
+  <div add-argument-modal ng-show="addingArgument"></div>
+  <ul ng-show="hasArguments()">
+    <li ng-repeat="(argument, kids) in arguments">
+      <a href="/arguments/{{ argument }}">{{ argument }}</a>
+    </li>
+  </ul>
+</div>
