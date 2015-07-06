@@ -26,6 +26,9 @@
 
     app.controller('MainController', ['$scope', function ($scope) {
         $scope.arguments = {};
-        $scope.currentArgument = null;
+
+        $scope.addArgument = function(argument, kids) {
+            $scope.arguments[argument] = kids;
+        };
     }]);
 })();

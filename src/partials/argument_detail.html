@@ -1,9 +1,11 @@
+<ol class="breadcrumb">
+    <li><a href="/arguments">Arguments</a></li>
+    <li class="active">{{ argumentDetail.argument }}</li>
+</ol>
 <div>
-  <h2>{{ argumentDetail.argument }}</h2>
-  <ul ng-show="argumentDetail.kids.length > 0">
-    <li ng-repeat="kid in argumentDetail.kids"
-        ng-click="argumentDetail.takeTurn($index)">
-      {{ kid }}
-    </li>
-  </ul>
+  <div class="row"
+       ng-repeat="kid in argumentDetail.kids"
+       ng-click="argumentDetail.takeTurn($index)">
+    {{ kid }}
+  </div>
 </div>

@@ -19,7 +19,6 @@
 
             this.saveArgument = function() {
                 $scope.addArgument(this.argument, this.kids);
-                $scope.hideAddArgumentModal();
                 this.reset();
             };
         }

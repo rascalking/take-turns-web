@@ -1,17 +1,43 @@
-<div>
-  <form novalidate ng-controller="AddArgumentController as ctrl">
-    <label>What is the argument about?</label>
-    <br />
-    <input type="text" ng-model="ctrl.argument"></input>
-    <br />
+<div class="modal fade" id="addArgumentModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add An Argument</h4>
+      </div>
 
-    <label>Who is arguing about it?</label>
-    <div ng-repeat="kid in ctrl.kids">{{ kid }}</div>
-    <br />
-    <input type="text" ng-model="ctrl.newKid" />
-    <input type="submit" ng-click="ctrl.addKid()" value="Add" />
-    <br />
-    <input type="button" ng-click="ctrl.reset()" value="Reset" />
-    <input type="submit" ng-click="ctrl.saveArgument()" value="Save" />
-  </form>
+      <div class="modal-body">
+        <form novalidate ng-controller="AddArgumentController as ctrl">
+          <div class="form-group">
+            <label>What is the argument about?</label>
+            <input type="text" ng-model="ctrl.argument"></input>
+          </div>
+
+          <div class="form-group">
+            <label>Who is arguing about it?</label>
+            <div ng-repeat="kid in ctrl.kids">{{ kid }}</div>
+            <br />
+            <div>
+              <input type="text" ng-model="ctrl.newKid" />
+              <button class="btn btn-default btn-sm" ng-click="ctrl.addKid()">
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div>
+              <button class="btn btn-default" ng-click="ctrl.reset()" data-dismiss="modal">
+                Cancel
+              </button>
+              <button class="btn btn-primary" ng-click="ctrl.saveArgument()"
+                      data-dismiss="modal">
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
