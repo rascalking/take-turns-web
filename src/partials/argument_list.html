@@ -2,16 +2,16 @@
   <li class="active">Arguments</li>
 </ol>
 <div>
-  <div class="row">
+  <table ng-show="hasArguments()" class="table table-bordered">
+    <tr ng-repeat="(argument, kids) in arguments">
+      <td><a href="/arguments/{{ argument }}">{{ argument }}</a></td>
+    </tr>
+  </table>
+  <div>
     <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target="#addArgumentModal">
       Add Argument
     </button>
   </div>
   <div add-argument-modal></div>
-  <div ng-show="hasArguments()" class="row">
-    <div ng-repeat="(argument, kids) in arguments">
-      <a href="/arguments/{{ argument }}">{{ argument }}</a>
-    </div>
-  </div>
 </div>
