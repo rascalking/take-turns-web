@@ -35,6 +35,7 @@
             
             $scope.addArgument = function(argument, kids) {
                 $scope.arguments[argument] = kids;
+                $scope.arguments.$save();
             };
         }
     ]);
