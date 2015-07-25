@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+import functools
 import os
 
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api
+from flask_restful.utils import cors
 from sqlalchemy.dialects.postgresql import JSON
 
 
@@ -13,7 +15,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 api = Api(app)
 db = SQLAlchemy(app)
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,14 +27,21 @@ class User(db.Model):
 
 
 class Arguments(Resource):
+    @cors.crossdomain(origin='*', headers='Content-Type')
     def get(self):
-        return User.query.filter_by(email='dbonner@gmail.com').first().arguments
+        return jsonify(User.query.filter_by(email='dbonner@gmail.com')
+                           .first().arguments)
 
+    @cors.crossdomain(origin='*', headers='Content-Type')
     def post(self):
         user = User.query.filter_by(email='dbonner@gmail.com').first()
         user.arguments = request.get_json()
         db.session.commit()
-        return user.arguments
+        return jsonify(user.arguments)
+
+    @cors.crossdomain(origin='*', headers='Content-Type')
+    def options(self):
+        return super(Arguments, self).options()
 
 api.add_resource(Arguments, '/')
 

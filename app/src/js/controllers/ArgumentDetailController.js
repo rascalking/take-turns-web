@@ -9,6 +9,7 @@
 
             ctrl.takeTurn = function(index) {
                 ctrl.kids.push(ctrl.kids.splice(index, 1)[0]);
+                $scope.arguments.$save();
             };
         }
     ]);

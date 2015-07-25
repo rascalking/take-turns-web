@@ -1,5 +1,6 @@
 (function () {
-    var app = angular.module('takeTurnsApp', ['ngRoute']);
+    var app = angular.module('takeTurnsApp', ['ngRoute', 'ngResource']);
+
     app.config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/arguments', {
@@ -24,11 +25,17 @@
         };
     });
 
-    app.controller('MainController', ['$scope', function ($scope) {
-        $scope.arguments = {};
-
-        $scope.addArgument = function(argument, kids) {
-            $scope.arguments[argument] = kids;
-        };
-    }]);
+    app.controller('MainController',
+                   ['$scope', '$resource',
+        function ($scope, $resource) {
+            $scope.api_url = 'http://192.168.99.100:5000/';
+            $scope.Argument = $resource($scope.api_url);
+            $scope.arguments = {};
+            $scope.arguments = $scope.Argument.get();
+            
+            $scope.addArgument = function(argument, kids) {
+                $scope.arguments[argument] = kids;
+            };
+        }
+    ]);
 })();
