@@ -8,6 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api
 from flask_restful.utils import cors
 from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 
 
 app = Flask(__name__)
@@ -48,10 +49,15 @@ api.add_resource(Arguments, '/')
 
 def init_db():
     db.create_all()
-    user = User('dbonner@gmail.com', {'show': ['juliet', 'cole', 'eve']})
-    db.session.add(user)
-    db.session.commit()
+    try:
+        db.session.query(User).filter(
+            User.email=='dbonner@gmail.com').one()
+    except (MultipleResultsFound, NoResultFound) as e:
+        user = User('dbonner@gmail.com', {})
+        db.session.add(user)
+        db.session.commit()
 
 
 if __name__ == '__main__':
+    init_db()
     app.run('0.0.0.0', debug=True)

@@ -28,7 +28,7 @@
     app.controller('MainController',
                    ['$scope', '$resource',
         function ($scope, $resource) {
-            $scope.api_url = 'http://192.168.99.100:5000/';
+            $scope.api_url = '/api';
             $scope.Argument = $resource($scope.api_url);
             $scope.arguments = {};
             $scope.arguments = $scope.Argument.get();
