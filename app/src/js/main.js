@@ -1,7 +1,8 @@
 (function () {
     var app = angular.module('takeTurnsApp', ['ngRoute', 'ngResource']);
 
-    app.config(function($routeProvider, $locationProvider) {
+    app.config(['$routeProvider', '$locationProvider', '$resourceProvider',
+                function($routeProvider, $locationProvider, $resourceProvider) {
         $routeProvider
             .when('/arguments', {
                 templateUrl: 'partials/argument_list.html',
@@ -17,7 +18,10 @@
                 redirectTo: '/arguments'
             });
         $locationProvider.html5Mode(true);
-    });
+
+        // Don't strip trailing slashes from calculated URLs
+        $resourceProvider.defaults.stripTrailingSlashes = false;
+    }]);
 
     app.directive('addArgumentModal', function() {
         return {
@@ -28,7 +32,7 @@
     app.controller('MainController',
                    ['$scope', '$resource',
         function ($scope, $resource) {
-            $scope.api_url = '/api';
+            $scope.api_url = '/api/';
             $scope.Argument = $resource($scope.api_url);
             $scope.arguments = {};
             $scope.arguments = $scope.Argument.get();

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import functools
+import logging
 import os
 
 from flask import Flask, jsonify, request
@@ -16,6 +17,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 api = Api(app)
 db = SQLAlchemy(app)
+logger = logging.getLogger(__name__)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +38,7 @@ class Arguments(Resource):
 
     @cors.crossdomain(origin='*', headers='Content-Type')
     def post(self):
+        logger.debug('post request: {}'.format(request.get_json()))
         user = User.query.filter_by(email='dbonner@gmail.com').first()
         user.arguments = request.get_json()
         db.session.commit()
@@ -43,7 +47,6 @@ class Arguments(Resource):
     @cors.crossdomain(origin='*', headers='Content-Type')
     def options(self):
         return super(Arguments, self).options()
-
 api.add_resource(Arguments, '/')
 
 
@@ -53,11 +56,12 @@ def init_db():
         db.session.query(User).filter(
             User.email=='dbonner@gmail.com').one()
     except (MultipleResultsFound, NoResultFound) as e:
-        user = User('dbonner@gmail.com', {})
+        user = User(email='dbonner@gmail.com', arguments={})
         db.session.add(user)
         db.session.commit()
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
     init_db()
     app.run('0.0.0.0', debug=True)
