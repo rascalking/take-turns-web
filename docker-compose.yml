@@ -6,7 +6,7 @@ app:
     - api
 api:
   build: api
-  ports:
+  expose:
     - "5000:5000"
   links:
     - db
@@ -14,7 +14,7 @@ api:
     DATABASE_URL: "postgres://taketurns:soopersekrit@db/taketurns"
 db:
   image: postgres
-  ports:
+  expose:
     - "5432:5432"
   environment:
     POSTGRES_USER: "taketurns"
