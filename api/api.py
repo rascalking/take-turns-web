@@ -50,6 +50,11 @@ class Arguments(Resource):
 api.add_resource(Arguments, '/')
 
 
+@app.route('/ping', methods=['GET'])
+def ping(request):
+    return 'OK'
+
+
 def init_db():
     db.create_all()
     try:
