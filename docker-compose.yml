@@ -1,21 +1,19 @@
-app:
-  build: app
-  ports:
-    - "80:80"
-  links:
-    - api
-api:
-  build: api
-  expose:
-    - "5000:5000"
-  links:
-    - db
-  environment:
-    DATABASE_URL: "postgres://taketurns:soopersekrit@db/taketurns"
-db:
-  image: postgres
-  expose:
-    - "5432:5432"
-  environment:
-    POSTGRES_USER: "taketurns"
-    POSTGRES_PASSWORD: "soopersekrit"
+version: "3"
+services:
+  app:
+    build: app
+    ports:
+      - "80:80"
+    links:
+      - api
+  api:
+    build: api
+    links:
+      - db
+    environment:
+      DATABASE_URL: "postgres://taketurns:soopersekrit@db/taketurns"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: "taketurns"
+      POSTGRES_PASSWORD: "soopersekrit"
